@@ -13,21 +13,21 @@ trait BrandMock
     public function videoCardBrandMock(): array
     {
         return [
-            'Sapphire',
-            'PowerColor',
-            'ZOTAC',
-            'ASUS',
-            'MSI',
-            'Gigabyte',
-            'EVGA',
-            'NVIDIA',
-            'AMD',
-            'PNY',
-            'Palit',
-            'Gainward',
-            'Galax',
-            'XFX',
-            'Leadtek',
+            1 => 'Sapphire',
+            2 => 'PowerColor',
+            3 => 'ZOTAC',
+            4 => 'ASUS',
+            5 => 'MSI',
+            6 => 'Gigabyte',
+            7 => 'EVGA',
+            8 => 'NVIDIA',
+            9 => 'AMD',
+            10 => 'PNY',
+            11 => 'Palit',
+            12 => 'Gainward',
+            13 => 'Galax',
+            14 => 'XFX',
+            15 => 'Leadtek',
         ];
     }
 

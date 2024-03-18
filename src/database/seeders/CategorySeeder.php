@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
+use App\Database\Mock\СategoryMock;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class CategorySeeder extends Seeder
 {
-    use CategoryMock;
+    use СategoryMock;
     /**
      * Run the database seeds.
      */
