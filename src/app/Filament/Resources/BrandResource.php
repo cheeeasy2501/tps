@@ -5,13 +5,13 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BrandResource\Pages;
 use App\Filament\Resources\BrandResource\RelationManagers;
 use App\Models\Brand;
+use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BrandResource extends Resource
 {
@@ -24,11 +24,12 @@ class BrandResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                ->label('Бренд')
-                ->required(),
+                    ->label('Бренд')
+                    ->required(),
                 Forms\Components\Select::make('category_id')
                     ->relationship('category', 'name')
                     ->label('Категория')
+                    ->preload()
                     ->required(),
                 Forms\Components\TextInput::make('official_website')
                     ->label('Официальный вебсайт'),
@@ -44,13 +45,28 @@ class BrandResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Бренд')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('category.name')
+                    ->label('Категория')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('country_of_origin')
+                    ->label('Страна основания'),
+                Tables\Columns\TextColumn::make('year_founded')
+                    ->label('Год основания')
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('category')
+                    ->relationship('category', 'name')
+                    ->searchable()
+                    ->multiple()
+                    ->preload()
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
