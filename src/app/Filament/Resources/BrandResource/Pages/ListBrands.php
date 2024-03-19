@@ -4,7 +4,9 @@ namespace App\Filament\Resources\BrandResource\Pages;
 
 use App\Filament\Resources\BrandResource;
 use Filament\Actions;
+use Filament\Resources\Components\Tab;
 use Filament\Resources\Pages\ListRecords;
+use Illuminate\Database\Eloquent\Builder;
 
 class ListBrands extends ListRecords
 {
@@ -16,4 +18,5 @@ class ListBrands extends ListRecords
             Actions\CreateAction::make(),
         ];
     }
+
 }

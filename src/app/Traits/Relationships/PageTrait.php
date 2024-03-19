@@ -2,7 +2,7 @@
 
 namespace App\Traits\Relationships;
 
-use App\Models\Page;
+use app\Models\Filament\Page;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait PageTrait

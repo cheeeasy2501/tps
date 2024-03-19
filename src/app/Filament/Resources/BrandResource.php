@@ -5,17 +5,18 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BrandResource\Pages;
 use App\Filament\Resources\BrandResource\RelationManagers;
 use App\Models\Brand;
-use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Resources\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 
 class BrandResource extends Resource
 {
     protected static ?string $model = Brand::class;
+    protected static ?string $modelLabel = 'Бренд';
+    protected static ?string $pluralModelLabel = 'Бренды';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -89,5 +90,14 @@ class BrandResource extends Resource
             'create' => Pages\CreateBrand::route('/create'),
             'edit' => Pages\EditBrand::route('/{record}/edit'),
         ];
+    }
+
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            Pages\CreateBrand::class,
+            Pages\EditBrand::class,
+            Pages\ListBrands::class,
+        ]);
     }
 }

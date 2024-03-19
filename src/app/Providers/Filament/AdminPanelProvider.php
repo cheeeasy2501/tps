@@ -2,7 +2,9 @@
 
 namespace App\Providers\Filament;
 
-use Filament\Forms\Components\TextInput;
+use App\Enums\ContentEnum;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -26,22 +28,31 @@ class AdminPanelProvider extends PanelProvider
 {
     public function boot()
     {
-        // hook example
         FilamentFabricator::registerSchemaSlot('sidebar.after', [
-            TextInput::make('seo_title'),
+            Select::make('page_type')
+                ->label('Тип контента')
+                ->required()
+                ->options(ContentEnum::asLabels()),
+            Select::make('items')
+                ->label('Привязать комплектующие')
+                ->relationship('items', 'name')
+                ->multiple()
+                ->nullable()
+                ->searchable(),
+            SpatieTagsInput::make('tags')
+                ->label('Теги')
+                ->type('page')
         ]);
 
         FilamentFabricator::registerScripts([
-            'https://unpkg.com/browse/tippy.js@6.3.7/dist/tippy.esm.js', //external url
-            app(Vite::class)('resources/css/app.js'), //vite
-            asset('js/app.js'), // asset from public folder
+            app(Vite::class)('resources/js/app.js'), //vite
+//            asset('js/app.js'), // asset from public folder
         ]);
 
         //Register styles
         FilamentFabricator::registerStyles([
-            'https://unpkg.com/tippy.js@6/dist/tippy.css', //external url
             app(Vite::class)('resources/css/app.css'), //vite
-            asset('css/app.css'), // asset from public folder
+//            asset('css/app.css'), // asset from public folder
         ]);
     }
 

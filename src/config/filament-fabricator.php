@@ -33,7 +33,8 @@ return [
         \Illuminate\Routing\Middleware\SubstituteBindings::class,
     ],
 
-    'page-model' => \Z3d0X\FilamentFabricator\Models\Page::class,
+//    'page-model' => \Z3d0X\FilamentFabricator\Models\Page::class,
+    'page-model' => \App\Models\Filament\Page::class,
 
     'page-resource' => \Z3d0X\FilamentFabricator\Resources\PageResource::class,
 
