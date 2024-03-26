@@ -6,6 +6,7 @@ use App\Enums\Gpu\GpuManufacturerEnum;
 use App\Enums\Gpu\InterfaceEnum;
 use App\Enums\Gpu\MemoryTypeEnum;
 use App\Enums\Gpu\PowerConnectorEnum;
+use App\Enums\TableTierEnum;
 use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
@@ -124,6 +125,20 @@ final class GPUSchema
                                                 ->disabled(fn(Get $get): bool => !$get('display_port_exist'))
                                         ])
                                 ]),
+                        ]),
+                    Tabs\Tab::make('Таблица')
+                        ->schema([
+                            \Filament\Forms\Components\Radio::make('tier')
+                                ->label('Тир')
+                                ->options(TableTierEnum::class)
+                                ->required()
+                                ->default(TableTierEnum::WITHOUT->name)
+                                ->inline()
+                                ->inlineLabel(false),
+                            \Filament\Forms\Components\TextInput::make('custom_link')
+                                ->label('Кастомная ссылка')
+                                ->url()
+                                ->nullable()
                         ])
                 ])
         ];
