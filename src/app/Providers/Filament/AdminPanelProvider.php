@@ -32,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
             Select::make('page_type')
                 ->label('Тип контента')
                 ->required()
-                ->options(ContentEnum::asLabels()),
+                ->options(ContentEnum::class),
             Select::make('items')
                 ->label('Привязать комплектующие')
                 ->relationship('items', 'name')

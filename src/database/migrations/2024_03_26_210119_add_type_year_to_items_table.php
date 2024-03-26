@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('property_groups', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('items', function (Blueprint $table) {
+            $table->string('type')->after('name')->nullable();
+            $table->integer('year_of_release')->after('type')->nullable();
+
         });
     }
 
@@ -22,6 +23,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('property_groups');
+        Schema::table('items', function (Blueprint $table) {
+            $table->dropColumn(['year_of_release', 'type']);
+        });
     }
 };

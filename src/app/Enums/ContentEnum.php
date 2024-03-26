@@ -6,29 +6,26 @@ use app\Enums\MetaProperties\Label;
 use ArchTech\Enums\Metadata;
 use ArchTech\Enums\Names;
 use ArchTech\Enums\Values;
+use Filament\Support\Contracts\HasLabel;
 
 /**
  * @method string label()
  */
-enum ContentEnum: string
+enum ContentEnum: string implements HasLabel
 {
     use Names, Values, Metadata;
-//    #[Label('Новость')]
     case PAGE = 'page';
     case NEWS = 'news';
-//    #[Label('Обзор')]
     case REVIEW = 'review';
-//    #[Label('Статья')]
     case ARTICLE = 'article';
 
-
-    public static function asLabels(): array
+    #[\Override] public function getLabel(): ?string
     {
-        return [
-          ContentEnum::PAGE->value => 'Страница',
-          ContentEnum::NEWS->value => 'Новость',
-          ContentEnum::REVIEW->value => 'Обзор',
-          ContentEnum::ARTICLE->value => 'Статья',
-        ];
+        return match ($this) {
+            ContentEnum::PAGE => 'Страница',
+            ContentEnum::NEWS => 'Новость',
+            ContentEnum::REVIEW => 'Обзор',
+            ContentEnum::ARTICLE => 'Статья',
+        };
     }
 }
